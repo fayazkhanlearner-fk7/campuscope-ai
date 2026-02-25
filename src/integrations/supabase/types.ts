@@ -14,7 +14,169 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      attendance_records: {
+        Row: {
+          confidence_score: number | null
+          created_at: string
+          date: string
+          id: string
+          marked_by: string
+          status: string
+          student_id: string
+          subject: string
+          time: string
+        }
+        Insert: {
+          confidence_score?: number | null
+          created_at?: string
+          date?: string
+          id?: string
+          marked_by?: string
+          status?: string
+          student_id: string
+          subject: string
+          time?: string
+        }
+        Update: {
+          confidence_score?: number | null
+          created_at?: string
+          date?: string
+          id?: string
+          marked_by?: string
+          status?: string
+          student_id?: string
+          subject?: string
+          time?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "attendance_records_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
+            referencedRelation: "students"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      classes: {
+        Row: {
+          created_at: string
+          faculty_id: string | null
+          id: string
+          schedule: string
+          subject: string
+          total_students: number
+        }
+        Insert: {
+          created_at?: string
+          faculty_id?: string | null
+          id?: string
+          schedule: string
+          subject: string
+          total_students?: number
+        }
+        Update: {
+          created_at?: string
+          faculty_id?: string | null
+          id?: string
+          schedule?: string
+          subject?: string
+          total_students?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "classes_faculty_id_fkey"
+            columns: ["faculty_id"]
+            isOneToOne: false
+            referencedRelation: "faculty"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      faculty: {
+        Row: {
+          created_at: string
+          department: string
+          designation: string
+          email: string
+          faculty_id: string
+          id: string
+          name: string
+          phone: string | null
+          subjects: string[] | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          department: string
+          designation?: string
+          email: string
+          faculty_id: string
+          id?: string
+          name: string
+          phone?: string | null
+          subjects?: string[] | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          department?: string
+          designation?: string
+          email?: string
+          faculty_id?: string
+          id?: string
+          name?: string
+          phone?: string | null
+          subjects?: string[] | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      students: {
+        Row: {
+          attendance_percentage: number | null
+          created_at: string
+          department: string
+          email: string
+          face_registered: boolean
+          id: string
+          name: string
+          phone: string | null
+          semester: string
+          status: string
+          student_id: string
+          updated_at: string
+        }
+        Insert: {
+          attendance_percentage?: number | null
+          created_at?: string
+          department: string
+          email: string
+          face_registered?: boolean
+          id?: string
+          name: string
+          phone?: string | null
+          semester?: string
+          status?: string
+          student_id: string
+          updated_at?: string
+        }
+        Update: {
+          attendance_percentage?: number | null
+          created_at?: string
+          department?: string
+          email?: string
+          face_registered?: boolean
+          id?: string
+          name?: string
+          phone?: string | null
+          semester?: string
+          status?: string
+          student_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

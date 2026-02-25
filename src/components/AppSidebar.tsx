@@ -11,6 +11,7 @@ import {
   Shield,
   Bell,
   Activity,
+  UserCog,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { currentUser } from "@/lib/mock-data";
@@ -19,6 +20,7 @@ const adminLinks = [
   { title: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },
   { title: "Attendance", icon: Camera, path: "/attendance" },
   { title: "Students", icon: Users, path: "/students" },
+  { title: "Faculty", icon: UserCog, path: "/faculty" },
   { title: "Classes", icon: BookOpen, path: "/classes" },
   { title: "Analytics", icon: BarChart3, path: "/analytics" },
   { title: "Activity Log", icon: Activity, path: "/activity" },
