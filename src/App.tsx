@@ -12,6 +12,7 @@ import SettingsPage from "./pages/SettingsPage";
 import StudentsPage from "./pages/StudentsPage";
 import ClassesPage from "./pages/ClassesPage";
 import AnalyticsPage from "./pages/AnalyticsPage";
+import FacultyPage from "./pages/FacultyPage";
 import ActivityLogPage from "./pages/ActivityLogPage";
 import StudentAttendancePage from "./pages/StudentAttendancePage";
 import StudentNotificationsPage from "./pages/StudentNotificationsPage";
@@ -32,6 +33,7 @@ const App = () => (
           <Route path="/dashboard" element={<AdminDashboard />} />
           <Route path="/attendance" element={<AttendancePage />} />
           <Route path="/students" element={<StudentsPage />} />
+          <Route path="/faculty" element={<FacultyPage />} />
           <Route path="/classes" element={<ClassesPage />} />
           <Route path="/analytics" element={<AnalyticsPage />} />
           <Route path="/activity" element={<ActivityLogPage />} />
