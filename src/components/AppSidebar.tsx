@@ -120,10 +120,10 @@ export function AppSidebar({ collapsed, onToggle }: AppSidebarProps) {
         </div>
       </div>
 
-      {/* Toggle */}
+      {/* Toggle - hidden on mobile */}
       <button
         onClick={onToggle}
-        className="absolute -right-3 top-20 flex h-6 w-6 items-center justify-center rounded-full border border-sidebar-border bg-sidebar text-sidebar-foreground hover:bg-sidebar-accent transition-colors"
+        className="absolute -right-3 top-20 hidden md:flex h-6 w-6 items-center justify-center rounded-full border border-sidebar-border bg-sidebar text-sidebar-foreground hover:bg-sidebar-accent transition-colors"
       >
         <svg
           className={cn("h-3 w-3 transition-transform", collapsed && "rotate-180")}
