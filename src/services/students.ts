@@ -1,4 +1,4 @@
-import { supabase } from "@/lib/supabase";
+import { supabase } from "@/integrations/supabase/client";
 
 export interface Student {
   id: string;
@@ -29,7 +29,7 @@ export async function fetchStudents() {
 export async function createStudent(student: Partial<StudentInsert>) {
   const { data, error } = await supabase
     .from("students")
-    .insert(student)
+    .insert([student] as any)
     .select()
     .single();
   if (error) throw error;
