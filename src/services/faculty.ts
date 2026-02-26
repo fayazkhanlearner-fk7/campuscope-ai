@@ -1,4 +1,4 @@
-import { supabase } from "@/lib/supabase";
+import { supabase } from "@/integrations/supabase/client";
 
 export interface Faculty {
   id: string;
@@ -27,7 +27,7 @@ export async function fetchFaculty() {
 export async function createFaculty(faculty: Partial<FacultyInsert>) {
   const { data, error } = await supabase
     .from("faculty")
-    .insert(faculty)
+    .insert([faculty] as any)
     .select()
     .single();
   if (error) throw error;
