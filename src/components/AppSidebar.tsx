@@ -14,7 +14,7 @@ import {
   UserCog,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { currentUser } from "@/lib/mock-data";
+import { useAuth } from "@/hooks/useAuth";
 
 const adminLinks = [
   { title: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },
@@ -42,9 +42,13 @@ interface AppSidebarProps {
 export function AppSidebar({ collapsed, onToggle }: AppSidebarProps) {
   const location = useLocation();
   const navigate = useNavigate();
+  const { user, roles, signOut } = useAuth();
 
-  const isAdmin = currentUser.role === "admin" || currentUser.role === "faculty";
+  const isAdmin = roles.includes("admin") || roles.includes("faculty");
   const links = isAdmin ? adminLinks : studentLinks;
+  const displayName = user?.user_metadata?.full_name || user?.email || "User";
+  const initials = displayName.split(" ").map((n: string) => n[0]).join("").slice(0, 2).toUpperCase();
+  const roleLabel = roles[0] ? roles[0].charAt(0).toUpperCase() + roles[0].slice(1) : "User";
 
   return (
     <aside
@@ -99,21 +103,21 @@ export function AppSidebar({ collapsed, onToggle }: AppSidebarProps) {
       <div className="border-t border-sidebar-border p-3">
         <div className={cn("flex items-center gap-3", collapsed && "justify-center")}>
           <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-sidebar-accent text-sidebar-accent-foreground text-xs font-semibold">
-            {currentUser.name.split(" ").map((n) => n[0]).join("")}
+            {initials}
           </div>
           {!collapsed && (
             <div className="flex-1 min-w-0 animate-fade-in">
               <p className="text-xs font-medium text-sidebar-accent-foreground truncate">
-                {currentUser.name}
+                {displayName}
               </p>
               <p className="text-[10px] text-sidebar-foreground/60 truncate">
-                {currentUser.role.charAt(0).toUpperCase() + currentUser.role.slice(1)}
+                {roleLabel}
               </p>
             </div>
           )}
           {!collapsed && (
             <button
-              onClick={() => navigate("/login")}
+              onClick={async () => { await signOut(); navigate("/login"); }}
               className="text-sidebar-foreground/60 hover:text-sidebar-accent-foreground transition-colors"
             >
               <LogOut className="h-4 w-4" />
