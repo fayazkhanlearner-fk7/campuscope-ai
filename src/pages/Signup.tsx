@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { forwardRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Shield, Eye, EyeOff, ArrowRight, Mail } from "lucide-react";
@@ -6,7 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import heroPattern from "@/assets/hero-pattern.jpg";
 
-export default function Signup() {
+const Signup = forwardRef<HTMLDivElement>((_props, ref) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
@@ -45,7 +45,7 @@ export default function Signup() {
 
   if (emailSent) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-background p-8">
+      <div ref={ref} className="flex min-h-screen items-center justify-center bg-background p-8">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -70,7 +70,7 @@ export default function Signup() {
   }
 
   return (
-    <div className="flex min-h-screen">
+    <div ref={ref} className="flex min-h-screen">
       {/* Left - Visual */}
       <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden items-center justify-center">
         <img src={heroPattern} alt="Face recognition" className="absolute inset-0 w-full h-full object-cover" />
@@ -163,4 +163,8 @@ export default function Signup() {
       </div>
     </div>
   );
-}
+});
+
+Signup.displayName = "Signup";
+
+export default Signup;
