@@ -1,12 +1,13 @@
+import { forwardRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Shield } from "lucide-react";
 
-const NotFound = () => {
+const NotFound = forwardRef<HTMLDivElement>((_props, ref) => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+    <div ref={ref} className="flex min-h-screen items-center justify-center bg-background px-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -29,6 +30,8 @@ const NotFound = () => {
       </motion.div>
     </div>
   );
-};
+});
+
+NotFound.displayName = "NotFound";
 
 export default NotFound;

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { forwardRef, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Shield, Eye, EyeOff, ArrowRight } from "lucide-react";
@@ -7,7 +7,7 @@ import { lovable } from "@/integrations/lovable/index";
 import { toast } from "sonner";
 import heroPattern from "@/assets/hero-pattern.jpg";
 
-export default function Login() {
+const Login = forwardRef<HTMLDivElement>((_props, ref) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,7 +28,6 @@ export default function Login() {
     if (error) {
       toast.error(error.message);
     } else {
-      // Role-based redirect happens in App via auth context
       navigate("/dashboard");
     }
   };
@@ -61,7 +60,7 @@ export default function Login() {
   };
 
   return (
-    <div className="flex min-h-screen">
+    <div ref={ref} className="flex min-h-screen">
       {/* Left - Visual */}
       <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden items-center justify-center">
         <img src={heroPattern} alt="Face recognition technology" className="absolute inset-0 w-full h-full object-cover" />
@@ -197,4 +196,8 @@ export default function Login() {
       </div>
     </div>
   );
-}
+});
+
+Login.displayName = "Login";
+
+export default Login;
